@@ -16,7 +16,27 @@ class TwoPanels extends StatefulWidget {
 
 
 
-class _TwoPanelsState extends State<TwoPanels> {
+class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMixin{
+  AnimationController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller=new AnimationController(vsync: this,duration: new Duration(microseconds: 100),value: 1.0);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
+
+  bool get isPanelVisible{
+    final AnimationStatus status=controller.status;
+    return status==AnimationStatus.completed||status==AnimationStatus.forward;
+  }
+
 
   static const header_height=4.0;
   int _current =0;
@@ -33,12 +53,6 @@ class _TwoPanelsState extends State<TwoPanels> {
         }
         return result;
      }
-
-
-
-
-
-
   Animation<RelativeRect> getPanelAnimation(BoxConstraints constraints){
     final height =280.0;
     final bakcpanelheight=height-header_height;
@@ -65,8 +79,6 @@ class _TwoPanelsState extends State<TwoPanels> {
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
-
-
                       children: <Widget>[
                         Column(
                           children: <Widget>[
@@ -101,9 +113,6 @@ class _TwoPanelsState extends State<TwoPanels> {
 
 
                         ),
-
-
-
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -297,8 +306,28 @@ class _TwoPanelsState extends State<TwoPanels> {
 
   @override
   Widget build(BuildContext context) {
-    return new LayoutBuilder(
-      builder: bothPanels,
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('پروفایل' ,
+          style: TextStyle(
+            fontSize: 25.0,
+          ),
+
+        ),
+        elevation: 0.0,
+
+        leading: new IconButton(
+          onPressed:(){
+            controller.fling(velocity: isPanelVisible?-1.0:1.0);               },
+          icon: new AnimatedIcon(icon: AnimatedIcons.close_menu,progress: controller.view,),),
+      ),
+      body: new LayoutBuilder(
+        builder: bothPanels,
+      ),
+
     );
   }
 }
+
+
+
