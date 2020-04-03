@@ -129,7 +129,7 @@ class _TwoPanelsState extends State<TwoPanels> {
                               ),
                             ),
                         Text(
-                        'اشیمی استاد شهریاری' ,
+                       'استاد شهریاری',
                         style: TextStyle(
                           fontSize: 12.0,
 
@@ -179,7 +179,7 @@ class _TwoPanelsState extends State<TwoPanels> {
                               shape: CircleBorder(),
                             ),
                             Text(
-                                'درباره ی ما',
+                           'تنظیمات',
                               style: TextStyle(
                                   color: Colors.black
                               ),
