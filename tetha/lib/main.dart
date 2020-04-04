@@ -1,10 +1,21 @@
+
+
+
 import 'package:flutter/material.dart';
-import 'twopanel.dart';
+import 'package:tetha/Runner.dart';
+
+
+
+
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: new ThemeData(primarySwatch: Colors.yellow),
-  home:new BackdropPage(),
+  home: Runner(),
+
+
+
 ));
+
 
 class BackdropPage extends StatefulWidget {
   @override
@@ -14,10 +25,10 @@ class BackdropPage extends StatefulWidget {
 class _BackdropPageState extends State<BackdropPage> with SingleTickerProviderStateMixin {
 
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 class TwoPanels extends StatefulWidget {
   final AnimationController controller;
 
-   TwoPanels({this.controller}) {}
+  TwoPanels({this.controller}) {}
   @override
   _TwoPanelsState createState() => _TwoPanelsState();
 }
@@ -16,27 +16,7 @@ class TwoPanels extends StatefulWidget {
 
 
 
-class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMixin{
-  AnimationController controller;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    controller=new AnimationController(vsync: this,duration: new Duration(microseconds: 100),value: 1.0);
-  }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    controller.dispose();
-  }
-
-  bool get isPanelVisible{
-    final AnimationStatus status=controller.status;
-    return status==AnimationStatus.completed||status==AnimationStatus.forward;
-  }
-
+class _TwoPanelsState extends State<TwoPanels> {
 
   static const header_height=4.0;
   int _current =0;
@@ -45,14 +25,20 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
     'https://images-na.ssl-images-amazon.com/images/I/81WS5YsKmML._SX268_.jpg'
   ];
 
-     List<T>map<T>(List list,Function function){
-       List <T> result=[];
-        for(var i=0;i<imagelist.length;i++){
-          result.add(function(i,imagelist[i]));
+  List<T>map<T>(List list,Function function){
+    List <T> result=[];
+    for(var i=0;i<imagelist.length;i++){
+      result.add(function(i,imagelist[i]));
 
-        }
-        return result;
-     }
+    }
+    return result;
+  }
+
+
+
+
+
+
   Animation<RelativeRect> getPanelAnimation(BoxConstraints constraints){
     final height =280.0;
     final bakcpanelheight=height-header_height;
@@ -79,6 +65,8 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
+
+
                       children: <Widget>[
                         Column(
                           children: <Widget>[
@@ -103,7 +91,7 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
                           width: 70.0,
                           height: 70.0,
                           child: Icon(
-                            Icons.person
+                              Icons.person
                           ),
 
                           decoration: new BoxDecoration(
@@ -113,12 +101,15 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
 
 
                         ),
+
+
+
                       ],
                     ),
                     SizedBox(height: 10,),
                     new Container(
-                        width: 280.0,
-                        height: 110.0,
+                      width: 280.0,
+                      height: 110.0,
                       child: new Container(
                         decoration: new BoxDecoration(
                             color: Colors.white,
@@ -137,58 +128,58 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
 
                               ),
                             ),
-                        Text(
-                       'استاد شهریاری',
-                        style: TextStyle(
-                          fontSize: 12.0,
+                            Text(
+                              'مانده تا شروع کلاس استاد شهریاری' ,
+                              style: TextStyle(
+                                fontSize: 12.0,
 
-                        ),
-                          )
+                              ),
+                            )
                           ],
                         ),
-                       ),
+                      ),
                     ),
                     SizedBox(height: 6,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround ,
 
                       children: <Widget>[
-                       Column(
-                         children: <Widget>[
-                           MaterialButton(
-                             onPressed: () {},
-                             color: Colors.blue,
-                             child: Icon(
-                               Icons.people,
-                               size: 24,
-                               color: Colors.black,
-                             ),
-                             padding: EdgeInsets.all(16),
-                             shape: CircleBorder(),
-                           ),
-                              Text(
-                                'درباره ی ما' ,
-                                style: TextStyle(
-                                  color: Colors.black
-                                ),
-                              )
-                         ],
-                       ),
                         Column(
                           children: <Widget>[
                             MaterialButton(
                               onPressed: () {},
                               color: Colors.blue,
                               child: Icon(
-                                Icons.settings,
+                                Icons.people,
                                 size: 24,
-                                color:Colors.black
+                                color: Colors.black,
                               ),
                               padding: EdgeInsets.all(16),
                               shape: CircleBorder(),
                             ),
                             Text(
-                           'تنظیمات',
+                              'درباره ی ما' ,
+                              style: TextStyle(
+                                  color: Colors.black
+                              ),
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            MaterialButton(
+                              onPressed: () {},
+                              color: Colors.blue,
+                              child: Icon(
+                                  Icons.settings,
+                                  size: 24,
+                                  color:Colors.black
+                              ),
+                              padding: EdgeInsets.all(16),
+                              shape: CircleBorder(),
+                            ),
+                            Text(
+                              'تنطیمات',
                               style: TextStyle(
                                   color: Colors.black
                               ),
@@ -204,97 +195,97 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
               ),
             ),
           ),
-      PositionedTransition(
-        rect: getPanelAnimation(constraints),
-        child: new Material(
-          elevation: 12.0,
+          PositionedTransition(
+            rect: getPanelAnimation(constraints),
+            child: new Material(
+              elevation: 12.0,
 
-          borderRadius: new BorderRadius.only(
-            topLeft: new Radius.circular(16.0),
-            topRight: new Radius.circular(16.0),
-          ),
-          child: Column(
-            children: <Widget>[
-              new Container(
-                height: header_height,
-                child: new Center(child: new Text('shop here',style: Theme.of(context).textTheme.button,
-                )
-                  ,
-                ),
+              borderRadius: new BorderRadius.only(
+                topLeft: new Radius.circular(16.0),
+                topRight: new Radius.circular(16.0),
               ),
-                 Container(
-                   child: new Expanded(
-                       child: new Column(
-                     mainAxisAlignment: MainAxisAlignment.center,
-                     crossAxisAlignment: CrossAxisAlignment.center,
-                     children: <Widget>[
-                       Divider(
-                         height: 10.0,
-                         thickness: 5.0,
-                         endIndent:100.0,
-                         indent: 100,
-                         color: Colors.black,
-                       ),
-                        CarouselSlider(
-                          height: 400,
-                          initialPage: 0,
-                          enlargeCenterPage: true
-                            ,
-                          reverse: false,
-                          autoPlayInterval:Duration(),
+              child: Column(
+                children: <Widget>[
+                  new Container(
+                    height: header_height,
+                    child: new Center(child: new Text('shop here',style: Theme.of(context).textTheme.button,
+                    )
+                      ,
+                    ),
+                  ),
+                  Container(
+                    child: new Expanded(
+                        child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Divider(
+                              height: 10.0,
+                              thickness: 5.0,
+                              endIndent:100.0,
+                              indent: 100,
+                              color: Colors.black,
+                            ),
+                            CarouselSlider(
+                                height: 400,
+                                initialPage: 0,
+                                enlargeCenterPage: true
+                                ,
+                                reverse: false,
+                                autoPlayInterval:Duration(),
 
-                          onPageChanged: (index){
-                            setState(() {
-                              _current=index;
-                            });
-                          },
-                          items: imagelist.map((imgUrl){
-                            return Builder(
-                                builder: (BuildContext context )
-                                {
+                                onPageChanged: (index){
+                                  setState(() {
+                                    _current=index;
+                                  });
+                                },
+                                items: imagelist.map((imgUrl){
+                                  return Builder(
+                                      builder: (BuildContext context )
+                                      {
+                                        return Container(
+                                          width: MediaQuery.of(context).size.width,
+                                          margin:EdgeInsets.symmetric(horizontal: 10.0),
+                                          decoration: BoxDecoration(
+                                            color: Colors.green,
+                                          ),
+                                          child: Image.network(
+                                            imgUrl,
+                                            fit: BoxFit.fill,
+                                          ),
+                                        );
+
+                                      });
+
+                                }).toList()
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: map<Widget>(imagelist,(index, url){
                                   return Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    margin:EdgeInsets.symmetric(horizontal: 10.0),
+                                    width:10.0 ,
+                                    height: 10.0,
+                                    margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 10.0),
                                     decoration: BoxDecoration(
-                                      color: Colors.green,
-                                    ),
-                                    child: Image.network(
-                                      imgUrl,
-                                      fit: BoxFit.fill,
+                                      shape: BoxShape.circle,
+                                      color: _current==index?Colors.black:Colors.blueGrey,
+
                                     ),
                                   );
-
-                            });
-
-                          }).toList()
-                        ),
-                       SizedBox(
-                         height: 20.0,
-                       ),
-                       Row(
-                         mainAxisAlignment: MainAxisAlignment.center,
-                         children: map<Widget>(imagelist,(index, url){
-                           return Container(
-                             width:10.0 ,
-                             height: 10.0,
-                             margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 10.0),
-                             decoration: BoxDecoration(
-                               shape: BoxShape.circle,
-                               color: _current==index?Colors.black:Colors.blueGrey,
-
-                             ),
-                           );
-                         }  )
+                                }  )
 
 
-                       )
-                     ],
-                   )),
-                 )
-            ],
+                            )
+                          ],
+                        )),
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
         ],
       ),
     );
@@ -306,28 +297,8 @@ class _TwoPanelsState extends State<TwoPanels> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('پروفایل' ,
-          style: TextStyle(
-            fontSize: 25.0,
-          ),
-
-        ),
-        elevation: 0.0,
-
-        leading: new IconButton(
-          onPressed:(){
-            controller.fling(velocity: isPanelVisible?-1.0:1.0);               },
-          icon: new AnimatedIcon(icon: AnimatedIcons.close_menu,progress: controller.view,),),
-      ),
-      body: new LayoutBuilder(
-        builder: bothPanels,
-      ),
-
+    return new LayoutBuilder(
+      builder: bothPanels,
     );
   }
 }
-
-
-
