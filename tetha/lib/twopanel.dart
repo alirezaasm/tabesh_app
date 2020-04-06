@@ -23,7 +23,7 @@ class _TwoPanelsState extends State<TwoPanels> {
   List imagelist=[
     'https://cdn.thewire.in/wp-content/uploads/2018/03/15152539/tom-and-jerry-.jpg',
     'https://images-na.ssl-images-amazon.com/images/I/81WS5YsKmML._SX268_.jpg'
-  ];
+  ];//Images for testing
 
   List<T>map<T>(List list,Function function){
     List <T> result=[];
@@ -33,6 +33,7 @@ class _TwoPanelsState extends State<TwoPanels> {
     }
     return result;
   }
+  // adding images to an liat
 
 
 
@@ -50,7 +51,7 @@ class _TwoPanelsState extends State<TwoPanels> {
       end :  new RelativeRect.fromLTRB(0,0,0,0),
     ).animate(new CurvedAnimation(parent: widget.controller, curve: Curves.linear));
 
-  }
+  }//handle backdroper
 
   Widget bothPanels(BuildContext context,BoxConstraints constraints){
     final ThemeData theme=Theme.of(context);
@@ -65,8 +66,6 @@ class _TwoPanelsState extends State<TwoPanels> {
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
-
-
                       children: <Widget>[
                         Column(
                           children: <Widget>[
@@ -101,8 +100,6 @@ class _TwoPanelsState extends State<TwoPanels> {
 
 
                         ),
-
-
 
                       ],
                     ),
@@ -215,73 +212,80 @@ class _TwoPanelsState extends State<TwoPanels> {
                   ),
                   Container(
                     child: new Expanded(
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Divider(
-                              height: 10.0,
-                              thickness: 5.0,
-                              endIndent:100.0,
-                              indent: 100,
-                              color: Colors.black,
-                            ),
-                            CarouselSlider(
-                                height: 400,
-                                initialPage: 0,
-                                enlargeCenterPage: true
-                                ,
-                                reverse: false,
-                                autoPlayInterval:Duration(),
+                        child: SingleChildScrollView(
+                          child: new Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Divider(
+                                height: 10.0,
+                                thickness: 5.0,
+                                endIndent:100.0,
+                                indent: 100,
+                                color: Colors.black,
+                              ),
+                              CarouselSlider(
+                                  height: 400,
+                                  initialPage: 0,
+                                  enlargeCenterPage: true
+                                  ,
+                                  reverse: false,
+                                  autoPlayInterval:Duration(),
 
-                                onPageChanged: (index){
-                                  setState(() {
-                                    _current=index;
-                                  });
-                                },
-                                items: imagelist.map((imgUrl){
-                                  return Builder(
-                                      builder: (BuildContext context )
-                                      {
-                                        return Container(
-                                          width: MediaQuery.of(context).size.width,
-                                          margin:EdgeInsets.symmetric(horizontal: 10.0),
-                                          decoration: BoxDecoration(
-                                            color: Colors.green,
-                                          ),
-                                          child: Image.network(
-                                            imgUrl,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        );
+                                  onPageChanged: (index){
+                                    setState(() {
+                                      _current=index;
+                                    });
+                                  },
+                                  items: imagelist.map((imgUrl){
+                                    return Builder(
+                                        builder: (BuildContext context )
+                                        {
+                                          return Container(
+                                            width: MediaQuery.of(context).size.width,
+                                            margin:EdgeInsets.symmetric(horizontal: 10.0),
+                                            decoration: BoxDecoration(
+                                              color: Colors.green,
+                                            ),
+                                            child: Image.network(
+                                              imgUrl,
+                                              fit: BoxFit.fill,
+                                            ),
+                                          );
 
-                                      });
+                                        });
 
-                                }).toList()
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: map<Widget>(imagelist,(index, url){
-                                  return Container(
-                                    width:10.0 ,
-                                    height: 10.0,
-                                    margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 10.0),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: _current==index?Colors.black:Colors.blueGrey,
+                                  }).toList()
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: map<Widget>(imagelist,(index, url){
+                                    return Container(
+                                      width:10.0 ,
+                                      height: 10.0,
+                                      margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 10.0),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: _current==index?Colors.black:Colors.blueGrey,
 
-                                    ),
-                                  );
-                                }  )
+                                      ),
+                                    );
+                                  }  )
 
 
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         )),
                   )
+                  //all slider in one list and add dots for shownig current slide
+
+
+                  //handle carousel_slider
+
                 ],
               ),
             ),
